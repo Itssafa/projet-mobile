@@ -33,10 +33,10 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Byrsa Events"),
+          title: Text("Podcast Explorer"),
           backgroundColor: Colors.blueAccent,
         ),
-        body: Text("Gestion des évènements!!"),
+        body: Text("Sound Horizon"),
       )
     );
   }
