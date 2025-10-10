@@ -28,7 +28,7 @@ class AppColors{
   static const Color info = Color(0xFF2196F3);
 
   //bg
-  static const Color ligh_bg = Color(0xFFF7FAFC);
+  static const Color ligh_bg = Color(0xFFd9dfe6);
   static const Color dark_bg = Color(0xFF2A3240);
 
   //grey
