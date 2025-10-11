@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import '../../utils/constants/colors.dart';
 
 class AppTheme {
   //light mOde
@@ -15,7 +15,7 @@ class AppTheme {
         surface:AppColors.grey_100 ,
         onSurface: AppColors.grey_1000
     ),
-    //TODO : Add dark theme colors
+    //TODO : Add dark common colors
     //TODO : Add font condition
   );
 }
