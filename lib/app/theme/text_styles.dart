@@ -15,4 +15,10 @@ class AppTextStyles{
     fontSize: 20,
     fontWeight: FontWeight.bold,
   );
+
+  static const TextStyle button=TextStyle(
+    fontFamily: bodyFontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+  );
 }

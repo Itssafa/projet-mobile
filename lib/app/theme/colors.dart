@@ -4,9 +4,9 @@ class AppColors{
   //blue colors
   static const Color blue_900 = Color(0xFF0C4180);
   static const Color blue_700 = Color(0xFF1268CC);
-  static const Color blue_500 = Color(0xFF1782FF);
+  static const Color primary = Color(0xFF1782FF);
   static const Color blue_300 = Color(0xFF74B4FF);
-  static const Color blue_100 = Color(0xFFD1E6FF);
+  static const Color disabled = Color(0xFFD1E6FF);
 //LIght blue colors
   static const Color light_blue_900 = Color(0xFF285B80);
   static const Color light_blue_700 = Color(0xFF4091CC);
@@ -43,6 +43,6 @@ class AppColors{
   static const Color grey_200 = Color(0xFFd9dfe6);
   static const Color grey_150 = Color(0xFFeceff2);
   static const Color grey_100 = Color(0xFFF7FAFC);
-  static const Color grey_0 = Color(0xFFFFFFFF);
+  static const Color secondary = Color(0xFFFFFFFF);
 
 }
