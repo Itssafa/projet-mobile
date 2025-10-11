@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/app/theme/app_theme.dart';
-import 'package:my_app/app/theme/colors.dart';
-import 'package:my_app/app/theme/text_styles.dart';
+import 'package:my_app/common/styles/app_theme.dart';
+import 'package:my_app/utils/constants/colors.dart';
+import 'package:my_app/utils/constants/text_styles.dart';
 
 
 void main() {
