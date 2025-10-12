@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/utils/constants/colors.dart';
+import 'package:my_app/utils/constants/sizes.dart';
 
 class COutlinedButtonTheme{
   COutlinedButtonTheme._();
@@ -11,9 +12,9 @@ class COutlinedButtonTheme{
       backgroundColor: AppColors.primary,
       disabledBackgroundColor: AppColors.grey_700,
       disabledForegroundColor: AppColors.grey_900,
-      padding: const EdgeInsets.symmetric(vertical: 18),
-      textStyle: const TextStyle(fontSize: 14 , color: AppColors.grey_100 , fontWeight: FontWeight.normal),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))
+      padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingMd),
+      textStyle: const TextStyle(fontSize: AppSizes.fontMd , color: AppColors.grey_100 , fontWeight: FontWeight.normal),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.fontMd))
     )
     );
 
@@ -24,9 +25,9 @@ class COutlinedButtonTheme{
           backgroundColor: AppColors.primary,
           disabledBackgroundColor: AppColors.grey_700,
           disabledForegroundColor: AppColors.grey_900,
-          padding: const EdgeInsets.symmetric(vertical: 18),
-          textStyle: const TextStyle(fontSize: 14 , color: AppColors.grey_100 , fontWeight: FontWeight.normal),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))
+          padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingMd),
+          textStyle: const TextStyle(fontSize: AppSizes.fontMd , color: AppColors.grey_100 , fontWeight: FontWeight.normal),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.fontMd))
       )
   );
 
