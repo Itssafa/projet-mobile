@@ -54,4 +54,7 @@ class AppSizes {
 
   // 🔹 Image Carousel
   static const double imageCarouselHeight = 200.0;
+  static const double spaceBtwItems = 14.0;
+  static const double defaultspace = 24.0;
+  static const double spaceBtwSEctions = 32.0;
 }
