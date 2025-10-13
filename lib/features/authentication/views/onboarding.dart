@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/authentication/models/onboarding.dart';
+import 'package:my_app/utils/constants/Content/onBoardingPages/textString.dart';
+import 'package:my_app/utils/constants/colors.dart';
+import 'package:my_app/utils/constants/imagesStrings.dart';
 
 class OnboardingPage1 extends StatelessWidget {
   const OnboardingPage1({super.key});
@@ -10,30 +13,28 @@ class OnboardingPage1 extends StatelessWidget {
       body: OnboardingPagePresenter(
         pages: [
           OnboardingPageModel(
-            title: 'Fast, Fluid and Secure',
-            description:
-            'Enjoy the best of the world in the palm of your hands.',
-            imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
-            bgColor: Colors.indigo,
+            title: textString.petOnboardingHeader,
+            description: textString.petOnboardingDescription,
+            imageUrl: ImagesSTring.loveOnboardingImages,
+            bgColor: AppColors.love,
           ),
           OnboardingPageModel(
-            title: 'Connect with your friends.',
-            description: 'Connect with your friends anytime anywhere.',
-            imageUrl: 'https://i.ibb.co/LvmZypG/storefront-illustration-2.png',
-            bgColor: const Color(0xff1eb090),
+            title: textString.foodOnboardingHeader,
+            description: textString.foodOnboardingHeader,
+            imageUrl: ImagesSTring.foodOnboardingImages,
+            bgColor:AppColors.food,
           ),
           OnboardingPageModel(
-            title: 'Bookmark your favourites',
-            description:
-            'Bookmark your favourite quotes to read at a leisure time.',
-            imageUrl: 'https://i.ibb.co/420D7VP/building.png',
-            bgColor: const Color(0xfffeae4f),
+            title: textString.appointementOnboardingHeader,
+            description: textString.apppointementOnboardingDescription,
+            imageUrl: ImagesSTring.vetOnboardingImages,
+            bgColor: AppColors.light_blue_500,
           ),
           OnboardingPageModel(
-            title: 'Follow creators',
-            description: 'Follow your favourite creators to stay in the loop.',
-            imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
-            bgColor: Colors.purple,
+            title: textString.budgetOnboardingHeader,
+            description: textString.budgetOnboardingDescription,
+            imageUrl: ImagesSTring.budgetOnboardingImages,
+            bgColor: AppColors.budget,
           ),
         ],
       ),
