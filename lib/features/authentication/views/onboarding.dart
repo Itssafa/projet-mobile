@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/authentication/models/onboarding.dart';
+import 'package:my_app/features/authentication/views/login.dart';
 import 'package:my_app/utils/constants/Content/onBoardingPages/textString.dart';
 import 'package:my_app/utils/constants/colors.dart';
 import 'package:my_app/utils/constants/imagesStrings.dart';
@@ -36,7 +37,20 @@ class OnboardingPage1 extends StatelessWidget {
             imageUrl: ImagesSTring.budgetOnboardingImages,
             bgColor: AppColors.budget,
           ),
+
         ],
+          onFinish: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const SignInPage1()),
+            );
+        },
+        onSkip: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SignInPage1()),
+          );
+        },
       ),
     );
   }
