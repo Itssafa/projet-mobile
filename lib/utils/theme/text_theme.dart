@@ -4,7 +4,7 @@ import 'package:my_app/utils/constants/sizes.dart';
 class CTextTheme{
   CTextTheme._();
   static TextTheme LightTextTheme = TextTheme(
-    headlineLarge: TextStyle().copyWith( fontSize: AppSizes.fontXxl, fontWeight: FontWeight.bold, color: AppColors.grey_800),
+    headlineLarge: TextStyle().copyWith( fontSize: AppSizes.fontXxl, fontWeight: FontWeight.w900, color: AppColors.grey_800),
     headlineMedium: TextStyle().copyWith( fontSize: AppSizes.fontXl2, fontWeight: FontWeight.w600, color: AppColors.grey_800),
     headlineSmall: TextStyle().copyWith(fontSize: AppSizes.fontXl, fontWeight: FontWeight.w500, color: AppColors.grey_800,),
 

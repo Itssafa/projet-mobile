@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  smooth_page_indicator: ^1.1.8
 
 #-----Ions
   cupertino_icons: ^1.0.8
@@ -36,6 +37,7 @@ flutter:
     - assets/logos/
     - assets/icons/
     - assets/images/
+    - assets/images/onBoardingPages/
   #--------------Local fonts -----------#
   fonts:
     - family: Montserrat

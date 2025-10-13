@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppColors{
+  //ONBoarding
+  static const Color budget= Color(0xFF81C784);
+  static const Color love= Color(0xFFF06292);
+  static const Color food= Color(0xFFFFA726);
+
+
   //blue colors
   static const Color blue_900 = Color(0xFF0C4180);
   static const Color blue_700 = Color(0xFF1268CC);
