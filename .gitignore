@@ -43,3 +43,26 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub/
+build/
+ios/Flutter/Flutter.framework
+ios/.symlinks/
+android/.gradle/
+android/app/build/
+*.lock
+
+# Hive local database
+*.hive
+*.lock
+
+# IDE related
+.idea/
+.vscode/
+*.iml
+
+# Others
+pubspec.lock
+
