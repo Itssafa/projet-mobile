@@ -1,0 +1,65 @@
+name: my_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+#----------------------Packages------------------------------------------------#
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI & Navigation
+  smooth_page_indicator: ^1.1.8
+  cupertino_icons: ^1.0.8
+
+  # Storage / Database
+  path: ^1.8.3
+  sqflite: ^2.2.0+3
+  sqflite_common_ffi: ^2.3.6
+  sembast: ^3.2.1
+  get_storage: ^2.1.1
+  fl_chart: ^0.66.0
+
+  # State management
+  get: ^4.6.5
+
+#----------------------Dev Packages------------------------------------------------#
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+#----------------------Flutter Settings------------------------------------------------#
+flutter:
+  uses-material-design: true
+
+  # Assets (décommenter si tu ajoutes des images / icônes)
+  # assets:
+  #   - assets/logos/
+  #   - assets/icons/
+  #   - assets/images/
+  #   - assets/images/onBoardingPages/
+
+  # Fonts
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Thin.ttf
+          weight: 200
+        - asset: assets/fonts/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/Montserrat-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Montserrat-Italic.ttf
+          style: italic
