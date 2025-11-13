@@ -106,7 +106,7 @@ class _PetPageState extends State<PetPage> {
           crossAxisCount: 2,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
-          childAspectRatio: 0.8,
+          childAspectRatio: 2.3,
         ),
         itemCount: pets.length,
         itemBuilder: (context, index) {
