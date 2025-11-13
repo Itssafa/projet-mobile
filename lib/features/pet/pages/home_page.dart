@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:my_app/utils/constants/Content/pet/homePageContent.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Pet Manager',
+                      HomePageContent.welcomeMessage,
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Manage your pets with love 🐾',
+                      HomePageContent.introText,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey.shade600,

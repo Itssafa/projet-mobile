@@ -15,7 +15,4 @@ class authentification {
   static const String cta = "Sign in";
   static const String signupDescription = "don't have an account ? ";
   static const String signupCta = "Sign up ";
-
-
-
 }
