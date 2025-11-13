@@ -1,0 +1,34 @@
+========================================
+  DÉMARRAGE RAPIDE - ANDROID STUDIO
+========================================
+
+ÉTAPE 1 : OUVRIR LE PROJET
+---------------------------
+1. Ouvrez Android Studio
+2. File > Open
+3. Sélectionnez ce dossier
+4. Cliquez sur OK
+
+ÉTAPE 2 : CRÉER UN ÉMULATEUR (si nécessaire)
+---------------------------------------------
+1. Tools > Device Manager
+2. Cliquez sur "Create Device"
+3. Choisissez un appareil (ex: Pixel 5)
+4. Téléchargez une image système (Android 11+)
+5. Cliquez sur Finish
+
+ÉTAPE 3 : LANCER L'APPLICATION
+-------------------------------
+1. Cliquez sur le bouton Run (▶️) en haut
+   OU appuyez sur Shift + F10
+2. Sélectionnez votre émulateur ou appareil
+3. L'application va se lancer !
+
+========================================
+  C'EST TOUT !
+========================================
+
+Le projet est maintenant propre et prêt pour Android Studio.
+
+Tous les fichiers Windows et scripts inutiles ont été supprimés.
+
