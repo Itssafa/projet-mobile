@@ -1,5 +1,6 @@
 class AuthFormData {
   String email = '';
   String password = '';
-  bool rememberMe = false;
+  // Used for sign-up and sign-in (for "Remember Me")
+  bool rememberMe = false; 
 }

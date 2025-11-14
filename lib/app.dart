@@ -9,7 +9,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'PawLink',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
