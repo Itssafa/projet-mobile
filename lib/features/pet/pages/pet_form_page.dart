@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../models/pet.dart';
@@ -21,6 +23,7 @@ class _PetFormPageState extends State<PetFormPage> {
   final _ageMonthsController = TextEditingController();
   bool _isVaccinated = false;
   String? _imagePath;
+  Uint8List? _imageBytes; // Pour stocker les bytes de l'image (web + desktop)
   String _selectedType = 'Chat';
 
   final List<String> _animalTypes = [
@@ -45,28 +48,80 @@ class _PetFormPageState extends State<PetFormPage> {
       _isVaccinated = pet.isVaccinated;
       _imagePath = pet.imageUrl;
       _selectedType = pet.type;
+
+      // Si vous stockez les images en base64 dans votre modèle Pet
+      // if (pet.imageBytes != null) {
+      //   _imageBytes = base64Decode(pet.imageBytes!);
+      // }
     }
   }
 
   Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery);
-    if (picked != null) {
-      setState(() => _imagePath = picked.path);
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+      if (pickedFile != null) {
+        final Uint8List bytes = await pickedFile.readAsBytes();
+
+        setState(() {
+          _imageBytes = bytes;
+          // Sur desktop, on garde aussi le chemin pour la compatibilité
+          if (!kIsWeb) {
+            _imagePath = pickedFile.path;
+          }
+        });
+      }
+    } catch (e) {
+      print('Erreur lors de la sélection d\'image: $e');
+      // Afficher un message d'erreur à l'utilisateur
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erreur lors de la sélection de l\'image: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
+  }
+
+  // Méthode pour obtenir l'image à afficher
+  ImageProvider? get _imageProvider {
+    if (_imageBytes != null) {
+      return MemoryImage(_imageBytes!);
+    } else if (_imagePath != null && !kIsWeb) {
+      return FileImage(File(_imagePath!));
+    }
+    return null;
   }
 
   void _savePet() {
     if (_formKey.currentState!.validate()) {
+      // Préparer l'URL de l'image pour la sauvegarde
+      String? imageUrlToSave;
+
+      // Sur le web, on peut sauvegarder l'image en base64 ou l'URL
+      if (kIsWeb && _imageBytes != null) {
+        // Option 1: Sauvegarder en base64
+        // imageUrlToSave = base64Encode(_imageBytes!);
+
+        // Option 2: Garder une référence (adaptez selon votre backend)
+        imageUrlToSave = 'web_image_${DateTime.now().millisecondsSinceEpoch}';
+      } else if (_imagePath != null) {
+        // Sur desktop, on garde le chemin
+        imageUrlToSave = _imagePath;
+      }
+
       final pet = Pet(
         id: widget.pet?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
         name: _nameController.text,
         type: _selectedType,
         breed: _breedController.text.isNotEmpty ? _breedController.text : null,
-        ageYears: int.tryParse(_ageYearsController.text) ?? 0, // ✅ conversion
-        ageMonths: int.tryParse(_ageMonthsController.text) ?? 0, // ✅ conversion
+        ageYears: int.tryParse(_ageYearsController.text) ?? 0,
+        ageMonths: int.tryParse(_ageMonthsController.text) ?? 0,
         isVaccinated: _isVaccinated,
-        imageUrl: _imagePath,
+        imageUrl: imageUrlToSave,
+        // Si vous voulez stocker les bytes directement
+        // imageBytes: _imageBytes != null ? base64Encode(_imageBytes!) : null,
       );
 
       widget.onSave(pet);
@@ -74,13 +129,50 @@ class _PetFormPageState extends State<PetFormPage> {
     }
   }
 
+  Widget _buildImageWidget() {
+    final imageProvider = _imageProvider;
+
+    return Stack(
+      children: [
+        CircleAvatar(
+          radius: 60,
+          backgroundColor: Colors.grey[300],
+          backgroundImage: imageProvider,
+          child: imageProvider == null
+              ? Icon(Icons.pets, size: 50, color: Colors.grey[600])
+              : null,
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 4,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: CircleAvatar(
+              radius: 18,
+              backgroundColor: Colors.teal,
+              child: Icon(Icons.camera_alt, color: Colors.white, size: 18),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-        Text(widget.pet == null ? 'Ajouter un animal' : 'Modifier l’animal'),
+        title: Text(widget.pet == null ? 'Ajouter un animal' : 'Modifier l\'animal'),
         backgroundColor: Colors.teal,
       ),
       body: Padding(
@@ -90,22 +182,10 @@ class _PetFormPageState extends State<PetFormPage> {
           child: ListView(
             children: [
               // 📸 Sélection image
-              GestureDetector(
-                onTap: _pickImage,
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundImage: _imagePath != null
-                      ? FileImage(File(_imagePath!))
-                      : const AssetImage('assets/images/default_pet.png')
-                  as ImageProvider,
-                  child: const Align(
-                    alignment: Alignment.bottomRight,
-                    child: CircleAvatar(
-                      radius: 18,
-                      backgroundColor: Colors.white,
-                      child: Icon(Icons.camera_alt, color: Colors.teal),
-                    ),
-                  ),
+              Center(
+                child: GestureDetector(
+                  onTap: _pickImage,
+                  child: _buildImageWidget(),
                 ),
               ),
               const SizedBox(height: 20),
@@ -116,18 +196,20 @@ class _PetFormPageState extends State<PetFormPage> {
                 decoration: const InputDecoration(
                   labelText: 'Nom',
                   border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.pets),
                 ),
                 validator: (value) =>
                 value == null || value.isEmpty ? 'Entrez un nom' : null,
               ),
               const SizedBox(height: 16),
 
-              // 🐶 Type d’animal
+              // 🐶 Type d'animal
               DropdownButtonFormField<String>(
                 value: _selectedType,
                 decoration: const InputDecoration(
-                  labelText: 'Type d’animal',
+                  labelText: 'Type d\'animal',
                   border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.category),
                 ),
                 items: _animalTypes
                     .map((type) =>
@@ -147,6 +229,7 @@ class _PetFormPageState extends State<PetFormPage> {
                 decoration: const InputDecoration(
                   labelText: 'Race (facultatif)',
                   border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.emoji_nature),
                 ),
               ),
               const SizedBox(height: 16),
@@ -161,7 +244,17 @@ class _PetFormPageState extends State<PetFormPage> {
                       decoration: const InputDecoration(
                         labelText: 'Âge (années)',
                         border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.calendar_today),
                       ),
+                      validator: (value) {
+                        if (value != null && value.isNotEmpty) {
+                          final years = int.tryParse(value);
+                          if (years == null || years < 0) {
+                            return 'Âge invalide';
+                          }
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -173,6 +266,15 @@ class _PetFormPageState extends State<PetFormPage> {
                         labelText: 'Âge (mois)',
                         border: OutlineInputBorder(),
                       ),
+                      validator: (value) {
+                        if (value != null && value.isNotEmpty) {
+                          final months = int.tryParse(value);
+                          if (months == null || months < 0 || months > 11) {
+                            return '0-11 mois';
+                          }
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ],
@@ -180,10 +282,17 @@ class _PetFormPageState extends State<PetFormPage> {
               const SizedBox(height: 16),
 
               // 💉 Vaccination
-              SwitchListTile(
-                title: const Text('Vacciné'),
-                value: _isVaccinated,
-                onChanged: (value) => setState(() => _isVaccinated = value),
+              Card(
+                child: SwitchListTile(
+                  title: const Text('Vacciné'),
+                  subtitle: const Text('L\'animal est à jour de ses vaccins'),
+                  value: _isVaccinated,
+                  onChanged: (value) => setState(() => _isVaccinated = value),
+                  secondary: Icon(
+                    _isVaccinated ? Icons.verified : Icons.warning,
+                    color: _isVaccinated ? Colors.green : Colors.orange,
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
 
@@ -194,9 +303,19 @@ class _PetFormPageState extends State<PetFormPage> {
                 label: const Text('Sauvegarder'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
+
+              // Bouton annuler
+              if (widget.pet != null) ...[
+                const SizedBox(height: 10),
+                OutlinedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Annuler'),
+                ),
+              ],
             ],
           ),
         ),
