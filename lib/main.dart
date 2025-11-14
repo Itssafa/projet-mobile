@@ -14,6 +14,7 @@ void main() async {
   // Initialize Hive
   await Hive.initFlutter();
   Hive.registerAdapter(FoodAdapter());
+  Hive.registerAdapter(UserAdapter());
 
 
   // Open boxes BEFORE running the app

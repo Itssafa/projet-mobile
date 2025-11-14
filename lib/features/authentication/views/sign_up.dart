@@ -111,6 +111,7 @@ class _SignUpPage1State extends State<SignUpPage1> {
                         }
                         return null;
                       },
+                      onSaved: (value) => controller.formData.password = value ?? '',
                       decoration: InputDecoration(
                         labelText: "Confirm Password",
                         hintText: "Re-enter your password",
@@ -162,7 +163,6 @@ class _SignUpPage1State extends State<SignUpPage1> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text("Account created!")),
                             );
-                            Navigator.pushNamed(context, '/login');
                           });
                         },
                         child: const Padding(
@@ -172,6 +172,7 @@ class _SignUpPage1State extends State<SignUpPage1> {
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
+                        
                       ),
                     ),
 
