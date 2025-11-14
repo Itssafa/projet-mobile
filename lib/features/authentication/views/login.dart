@@ -15,6 +15,15 @@ class _SignInPage1State extends State<SignInPage1> {
   final SignInController controller = SignInController();
 
   @override
+  void initState() {
+    super.initState();
+    // Charger les identifiants mémorisés au démarrage
+    controller.loadRememberedCredentials().then((_) {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
@@ -46,6 +55,7 @@ class _SignInPage1State extends State<SignInPage1> {
                     _gap(),
                     // Email
                     TextFormField(
+                      initialValue: controller.formData.email,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return authentification.emptyErrorMessage;
@@ -67,6 +77,7 @@ class _SignInPage1State extends State<SignInPage1> {
                     _gap(),
                     // Password
                     TextFormField(
+                      initialValue: controller.formData.password,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return authentification.emptyErrorMessage;
@@ -130,8 +141,8 @@ class _SignInPage1State extends State<SignInPage1> {
                         ),
                         onPressed: () {
                           controller.onSignIn(context, () {
-                            // TODO: Navigate after successful login
-                          });
+                            // Navigate to home page after successful login
+                            Navigator.pushReplacementNamed(context, '/home');});
                         },
                       ),
                     ),
