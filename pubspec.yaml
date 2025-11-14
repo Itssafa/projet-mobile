@@ -28,6 +28,7 @@ dependencies:
   get: ^4.6.5
   image_picker: ^1.2.1
   shared_preferences: ^2.5.3
+  image_picker_web: ^3.0.1
 
 #----------------------Packages END ------------------------------------------------#
 dev_dependencies:
@@ -43,6 +44,9 @@ flutter:
   #---------------------------Local assets --------------------------------------------#
   assets:
     - assets/fonts/
+    - assets/images/
+
+
   #--------------Local fonts -----------#
   fonts:
     - family: Montserrat
